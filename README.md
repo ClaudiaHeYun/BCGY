@@ -1,4 +1,4 @@
-# Homology-rep-of-compactified-conf-on-graphs
+# Homology representations of compactified configurations on graphs
 This repository hosts codes for the paper titled *Homology representations of compactified configurations on graphs applied to M_2n* by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. arXiv: xxxx
 
 ### Abstract
