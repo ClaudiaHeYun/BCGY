@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Data on Delta_2n</title>
+<meta name="author" content="Bibby, Chan, Gadish, Yun" />
+<meta name="description" content="Math">
+
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage", linked: 'True'});</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style type="text/css">
+p.serif{font-family:"Georgia","Times New Roman",Times,serif;}
+p.sansserif{font-family:Arial,Helvetica,sans-serif;}
+h3 {font-size:140%;}
+p {font-size:100%;}
+h4 {font-size:80%;}
+ol li {margin-bottom:.25em}
+</style>
+</head>
+
+<body>
+<h1>Homology representations of compactified configuration spaces on graphs</h1>
+
+<p>This page contains data from the paper <em>Homology representations of compactified configurations on graphs applied to \(\mathcal{M}_{2,n}\)</em>, by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. Please check out the paper for more details. </p>
+<p>On this page, we focus on the application to \(\mathcal{M}_{2,n}\). Let \(\Delta_{g,n}\) denote the moduli space of abstract tropical curves of genus \(g\) with \(n\) markings. There is an \(S_n\)-equivariant isomorphism \(Gr^W_{6+2n} H^{6+2n-k}(\mathcal{M}_{2,n};\mathbb{Q}) \cong \tilde{H}_{k-1}(\Delta_{2,n};\mathbb{Q})\). We develop an algorithm for computing \(\tilde{H}_*(\Delta_{2,n};\mathbb{Q})\) via the compactified configuration spaces on the Theta graph. </p>
+	
+<p>These cells are linked, so please evaluate them in order. The cell below contains all of our data.</p>
+<div class="sage">
+  <script type="text/x-sage">
+R.<q> = Frac(QQ['q'])
+p = SymmetricFunctions(R).p()
+s = SymmetricFunctions(R).s()
+
+# complete information
+chi1 = 0*s([1])
+chi2 = 0*s([2])
+chi3 = 0*s([3])
+chi4 = s([4])
+chi5 = s([3,2])
+chi6 = s([4,1,1])+s([3,2,1])
+chi7 = s([1]*7)+s([5,1,1])+s([4,3])+s([2,2,2,1])+s([4,2,1])+s([3,2,1,1])+s([4,1,1,1])+s([3,3,1])
+chi8 = s([8])+s([6,2])+s([5,3])+2*s([5,2,1])+s([5,1,1,1])+2*s([4,3,1])+2*s([4,2,2])+2*s([4,2,1,1])+s([3,3,2])+s([3,3,1,1])+2*s([3,2,2,1])+s([4,1,1,1,1])+2*s([3,2,1,1,1])+s([3,1,1,1,1,1])
+chi9 = s([1]*9)+2*s([7,2])+s([3,1,1,1,1,1,1])+s([6,3])+s([2,2,2,1,1,1])+3*s([6,2,1])+3*s([3,2,1,1,1,1])+s([6,1,1,1])+s([4,1,1,1,1,1])+2*s([5,4])+s([2,2,2,2,1])+3*s([5,3,1])+2*s([3,2,2,1,1])+5*s([5,2,2])+4*s([3,3,1,1,1])+4*s([5,2,1,1])+4*s([4,2,1,1,1])+3*s([5,1,1,1,1])+4*s([4,3,2])+4*s([3,3,2,1])
+chi10 = 2*s([8,1,1])+2*s([3,1,1,1,1,1,1,1])+2*s([7,3])+2*s([2,2,2,1,1,1,1])+4*s([7,2,1])+3*s([3,2,1,1,1,1,1])+3*s([7,1,1,1])+3*s([4,1,1,1,1,1,1])+2*s([6,4])+s([2,2,2,2,1,1])+9*s([6,3,1])+7*s([3,2,2,1,1,1])+4*s([6,2,2])+3*s([3,3,1,1,1,1])+8*s([6,2,1,1])+8*s([4,2,1,1,1,1])+2*s([6,1,1,1,1])+2*s([5,1,1,1,1,1])
+
+# partial information
+chi11 = s([1]*11)+2*s([2,2,1,1,1,1,1,1,1])+3*s([8,3])+2*s([2,2,2,1,1,1,1,1])+5*s([8,2,1])+6*s([3,2,1,1,1,1,1,1])+3*s([8,1,1,1])+2*s([4,1,1,1,1,1,1,1])+2*s([7,4])+4*s([2,2,2,2,1,1,1])+16*s([7,3,1])+8*s([3,2,2,1,1,1,1])+5*s([7,2,2])+11*s([3,3,1,1,1,1,1])+16*s([7,2,1,1])+11*s([4,2,1,1,1,1,1])+2*s([7,1,1,1,1])+7*s([5,1,1,1,1,1,1])
+for part in Partitions(11):
+    if part < [7,1,1,1,1] and part.conjugate() < [7,1,1,1,1]:
+        chi11 += q*s(part)
+chi12 = 1*s([12])+1*s([11,1])+2*s([10,2])+3*s([3,1,1,1,1,1,1,1,1,1])+4*s([9,3])+3*s([2,2,2,1,1,1,1,1,1])+8*s([9,2,1])+7*s([3,2,1,1,1,1,1,1,1])+3*s([9,1,1,1])+4*s([4,1,1,1,1,1,1,1,1])+7*s([8,4])+3*s([2,2,2,2,1,1,1,1])
+for part in Partitions(12):
+    if part < [8,4] and part.conjugate() < [8,4]:
+        chi12 += q*s(part)
+chi13 = 1*s([13])+2*s([1]*13)+4*s([11,2])+3*s([2,2,1,1,1,1,1,1,1,1,1])+5*s([10,3])+5*s([2,2,2,1,1,1,1,1,1,1])
+for part in Partitions(13):
+    if part < [10,3] and part.conjugate() < [10,3]:
+        chi13 += q*s(part)
+chi14 = s([12,2])+4*s([12,1,1])+5*s([3,1,1,1,1,1,1,1,1,1,1,1])+5*s([11,3])+5*s([2,2,2,1,1,1,1,1,1,1,1])
+for part in Partitions(14):
+    if part < [11,3] and part.conjugate() < [11,3]:
+        chi14 += q*s(part)
+chi15 = 2*s([1]*15) + 5*s([2,2]+[1]*11) + 6*s([13,1,1])
+for part in Partitions(15):
+    if part < [13,1,1] and part.conjugate() < [13,1,1]:
+        chi15 += q*s(part)
+chi16 = 2*s([16])+1*s([15,1])+4*s([14,2])+1*s([14,1,1])+7*s([3]+[1]*13)
+for part in Partitions(16):
+    if part < [14,1,1] and part.conjugate() < [14,1,1]:
+        chi16 += q*s(part)
+chi17 = s([17])+2*s([1]*17)+8*s([15,2])+7*s([2,2]+[1]*13)
+for part in Partitions(17):
+    if part < [15,2] and part.conjugate() < [15,2]:
+        chi17 += q*s(part)
+chi18 = 0*s([18])
+for part in Partitions(18):
+    if part < [17,1] and part.conjugate() < [17,1]:
+        chi18 += q*s(part)
+chi19 = 3*s([1]*19)
+for part in Partitions(19):
+    if part < [18,1] and part.conjugate() < [18,1]:
+        chi19 += q*s(part)
+chi20 = 2*s([20])+s([19,1])
+for part in Partitions(20):
+    if part < [19,1] and part.conjugate() < [19,1]:
+        chi20 += q*s(part)
+chi21 = s([21]) + 3*s([1]*21)
+for part in Partitions(21):
+    if part < [20,1] and part.conjugate() < [20,1]:
+        chi21 += q*s(part)
+chi22 = 0*s([22])
+for part in Partitions(22):
+    if part < [21,1] and part.conjugate() < [21,1]:
+        chi22 += q*s(part)
+chi23 = 3*s([1]*23)
+for part in Partitions(23):
+    if part < [23] and part.conjugate() < [23]:
+        chi23 += q*s(part)
+chi24 = 2*s([24])
+for part in Partitions(24):
+    if part < [24] and part.conjugate() < [24]:
+        chi24 += q*s(part)
+chi25 = 2*s([25])+4*s([1]*25)
+for part in Partitions(25):
+    if part < [25] and part.conjugate() < [25]:
+        chi25 += q*s(part)
+
+print('Success!')
+
+  </script>
+</div>
+
+<p> The following cell contains functions that help organizing and presenting the data.</p>
+
+<div class="sage">
+  <script type="text/x-sage">
+# This function gives the S_n-representation afforded by H_{n+2}(Delta_{2,n};Q) and H_{n+1}(Delta_{2,n};Q).
+# inputs: n, integer, number of marked points
+#         multiplicity, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.
+#         codim1, boolean. If True, the function will output H_{n+1}(Delta_{2,n};Q); if False, it gives H_{n+2}(Delta_{2,n};Q).
+def Delta2n(n, multiplicity = True, codim1 = True):
+    if multiplicity:
+        irreps = []
+        mults = []
+        if codim1:
+            rep = eval('chi'+str(n))
+            for part in Partitions(n):
+                irreps.append(part)
+                mults.append(rep.scalar(s(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Irreducible representation", "Multiplicity"))
+            for irrep, mult in zip(irreps, mults):
+                print(format_row.format(str(irrep), str(mult)))
+            return rep
+        else:
+            rep = eval('chi'+str(n))+(-1)^(n+1)*z2(n)
+            for part in Partitions(n):
+                irreps.append(part)
+                mults.append(rep.scalar(s(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Irreducible representation", "Multiplicity"))
+            for irrep, mult in zip(irreps, mults):
+                print(format_row.format(str(irrep), str(mult)))
+            return rep
+    else:
+        conj = []
+        char = []
+        if codim1:
+            rep = eval('chi'+str(n))
+            for part in Partitions(n):
+                conj.append(part)
+                char.append(rep.scalar(p(part)))
+                #print('conjugacy class',part,'value',rep.scalar(p(part)))
+        else:
+            rep = eval('chi'+str(n))+(-1)^(n+1)*z2(n)
+            for part in Partitions(n):
+                conj.append(part)
+                char.append(rep.scalar(p(part)))
+                #print('conjugacy class',part,'value',rep.scalar(p(part)))
+        format_row = "{:>80} {:>20}"
+        print(format_row.format("Conjugacy class", "Character value"))
+        for conjugacy, value in zip(conj, char):
+            print(format_row.format(str(conjugacy), str(value)))
+
+# This function gives the multiplicity of a specific irreducible representation or the character value of a specific conjugacy class
+# inputs: partion, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in
+#         multiplicty, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class
+#         codim1, boolean. If True, the function will inquire H_{n+1}(Delta_{2,n};Q); if False, it will inquire H_{n+2}(Delta_{2,n};Q).
+def Delta2n_partition(partition, multiplicity = True, codim1 = True):
+    n=sum(partition)
+    if multiplicity:
+        if codim1:
+            return eval('chi'+str(n)).scalar(s(partition))
+        else:
+            return (eval('chi'+str(n))+(-1)^(n+1)*z2(n)).scalar(s(partition))
+    else:
+        if codim1:
+            rep = eval('chi'+str(n))
+            return rep.scalar(p(partition))
+        else:
+            rep = eval('chi'+str(n))+(-1)^(n+1)*z2(n)
+            return rep.scalar(p(partition))
+
+# This function gives the multiplicity or character value for a family of partitions that look like (k,P), (k+1, P), (k+3, P), etc., where P is some fixed partition.
+# inputs: partition, array. This should be the fixed partition P.
+#         conjugate, boolean, if one would like to inquire the conjugate of the familiy (k,P), (k+1, P), (k+3, P), etc.
+#         multiplicity, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions
+#         codim1, boolean, if one would like to know about H_{n+1}(Delta_{2,n};Q) or H_{n+2}(Delta_{2,n};Q)
+def look_up_family(partition, conjugate = False, multiplicity = True, codim1 = True):
+    tail_sum = sum(partition)
+    parts = []
+    mults = []
+    if len(partition) > 0:
+        start = partition[0]
+    else:
+        start = 1
+    for i in range(start, 25-tail_sum+1):
+        part = Partition([i]+partition)
+        if conjugate:
+            parts.append(part.conjugate())
+            mults.append(Delta2n_partition(part.conjugate(), multiplicity, codim1))
+        else:
+            parts.append(part)
+            mults.append(Delta2n_partition(part, multiplicity, codim1))
+    if codim1:
+        print('H_{n+1}(Delta_{2,n};Q)')
+    else:
+        print('H_{n+2}(Delta_{2,n};Q)')
+    format_row = "{:>80} {:>20}"
+    if multiplicity:
+        print(format_row.format("Partition", "Multiplicity"))
+    else:
+        print(format_row.format("Partition", "Character value"))
+    for part, mult in zip(parts, mults):
+        print(format_row.format(str(part), str(mult)))
+
+# helper function
+def dPart(F, d):
+    R.<x,y,z,w> = QQ[]
+    F = F.polynomial(QQ)
+    return sum( [ F.monomial_coefficient(m) * m for m in F.monomials() if  m.weighted_degree({x:1, y:2, z:3, w:6}) == d ] )
+
+# Computes Faber's formula for g=2. See Theorem 1.1 and Example 8.3 of https://arxiv.org/abs/1904.06367. The output is written in the power sum basis.
+def z2(n):
+    # gives the degree n part of z_2 in terms of Schur functions
+    # this is (-1)^{n+1}H_{n+2} + (-1)^{n}H_{n+1}
+    var('x,y,z,w')
+    faber_2 = -1/12*1/(1+x)+1/2*(1+x)/(1+y)-1/6*(1+x)^2/(1+z)-1/12*(1+x)^3/(1+y)^2-1/6*(1+y)*(1+z)/(1+w)
+    taylor_series = taylor(faber_2, (x, 0),(y,0),(z,0),(w,0), n)
+    expanded = taylor_series.expand()
+    homogeneous = dPart(expanded, n)
+    if homogeneous == 0:
+        return 0
+    else:
+        symFnLookup = {'x':p([1]), 'y':p([2]),'z':p([3]),'w':p([6])}
+        symFnDic = {'{}'.format(ar): symFnLookup['{}'.format(ar)] for ar in homogeneous.args()}
+        powerSum = homogeneous(**symFnDic)
+        return powerSum
+print('Success!')
+  </script>
+
+</div>
+
+<p> Here are some examples. Note that since we only have partial information for n > 10, we use q to indicate unknown values. Please disregard all results that contain the letter q.</p>
+
+<p> Warning: Do NOT believe in the character values for n > 10. Sometimes the q's cancel with each other when they shouldn't. Only ask about multiplicities of specific irreducible representations when n > 10.</p>
+<div class="sage">
+  <script type="text/x-sage">
+# This gives the character table of H_8(Delta_{2,7};Q)
+Delta2n(7, multiplicity = False, codim1 = True)
+
+# This gives the Frobenius characteristic of H_9(Delta_{2,7};Q) in the Schur basis
+#Delta2n(7, multiplicity = True, codim1 = False)
+
+# This gives the character value of H_7(Delta_{2,6};Q) at the conjugacy class represented by (123)(45)(6)
+#Delta2n_partition([3,2,1], multiplicity = False, codim1 = True)
+
+# This gives the multiplicity of the irreducible representation indexed by [4,2,2,1] in H_11(Delta_{2,9};Q)
+#Delta2n_partition([4,2,2,1], multiplicity = True, codim1 = False)
+
+# This gives the multiplicity of the sign representation in H_3(Delta_{2,1};Q), H_4(Delta_{2,2};Q), H_5(Delta_{2,3};Q), etc.
+#look_up_family([], conjugate = True, multiplicity = True, codim1 = False)
+
+# This gives the multiplicity of the standard representation in H_3(Delta_{2,2};Q), H_4(Delta_{2,3};Q), H_5(Delta_{2,4};Q) etc.
+#look_up_family([1], conjugate = False, multiplicity = True, codim1 = True)
+  </script>
+</div>
+
+</body>
+</html>
