@@ -269,22 +269,22 @@ print('Success!')
     <p> Available functions are <br>
         <code>Delta2n(n, multiplicity = True, codim1 = True)</code>
         <p class="tab">This function gives the S_n-representation afforded by H_{n+2}(Delta_{2,n};Q) and H_{n+1}(Delta_{2,n};Q).<br>
-            <code>n</code>, integer, number of marked points <br>
+            <code>n</code>, integer, number of marked points. <br>
             <code>multiplicity</code>, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.<br>
             <code>codim1</code>, boolean. If True, the function will output H_{n+1}(Delta_{2,n};Q); if False, it gives H_{n+2}(Delta_{2,n};Q).
             </p><br>
         <code>Delta2n_partition(partition, multiplicity = True, codim1 = True)</code>
         <p class="tab">This function gives the multiplicity of a specific irreducible representation or the character value of a specific conjugacy class.<br>
-            <code>partion</code>, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in<br>
-            <code>multiplicty</code>, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class<br>
+            <code>partion</code>, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in.<br>
+            <code>multiplicty</code>, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class.<br>
             <code>codim1</code>, boolean. If True, the function will inquire H_{n+1}(Delta_{2,n};Q); if False, it will inquire H_{n+2}(Delta_{2,n};Q).
             </p><br>
         <code>look_up_family(partition, conjugate = False, multiplicity = True, codim1 = True)</code>
         <p class="tab">This function gives the multiplicity or character value for a family of partitions that look like (k,P), (k+1, P), (k+3, P), etc., where P is some fixed partition.<br>
             <code>partition</code>, array. This should be the fixed partition P.<br>
             <code>conjugate</code>, boolean, if one would like to inquire the conjugate of the familiy (k,P), (k+1, P), (k+3, P), etc.<br>
-            <code>multiplicity</code>, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions<br>
-            <code>codim1</code>, boolean, if one would like to know about H_{n+1}(Delta_{2,n};Q) or H_{n+2}(Delta_{2,n};Q)
+            <code>multiplicity</code>, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions.<br>
+            <code>codim1</code>, boolean, if one would like to know about H_{n+1}(Delta_{2,n};Q) or H_{n+2}(Delta_{2,n};Q).
             </p><br>
         We give some examples in the cell below. Note that since we only have partial information for \(n > 10\), we use \(q\) to indicate unknown values. Please disregard all results that contain the letter \(q\).</p>
     
