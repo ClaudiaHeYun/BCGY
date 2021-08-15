@@ -15,24 +15,45 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style type="text/css">
-p.serif{font-family:"Georgia","Times New Roman",Times,serif;}
-p.sansserif{font-family:Arial,Helvetica,sans-serif;}
+p {
+  font-family: Verdana,Geneva,sans-serif; 
+  font-size: 20px;
+}
+h1 {text-align:center}
 h3 {font-size:140%;}
 p {font-size:100%;}
 h4 {font-size:80%;}
-ol li {margin-bottom:.25em}
+body {
+margin-left:5%;
+margin-right:5%;
+}
+code {
+  background-color:#EEEEEE;
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+}
+.tab { margin-left: 40px; }
 </style>
 </head>
 
 <body>
-<h1>Homology representations of compactified configuration spaces on graphs</h1>
+    <h1>Homology representations of compactified configuration spaces on graphs</h1>
+    
+    <p>This page contains data from the paper <em>Homology representations of compactified configurations on graphs applied to \(\mathcal{M}_{2,n}\)</em>, by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. Please check out our paper for more details. </p>
 
-<p>This page contains data from the paper <em>Homology representations of compactified configurations on graphs applied to \(\mathcal{M}_{2,n}\)</em>, by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. Please check out the paper for more details. </p>
-<p>On this page, we focus on the application to \(\mathcal{M}_{2,n}\). Let \(\Delta_{g,n}\) denote the moduli space of abstract tropical curves of genus \(g\) with \(n\) markings. There is an \(S_n\)-equivariant isomorphism \(Gr^W_{6+2n} H^{6+2n-k}(\mathcal{M}_{2,n};\mathbb{Q}) \cong \tilde{H}_{k-1}(\Delta_{2,n};\mathbb{Q})\). We develop an algorithm for computing \(\tilde{H}_*(\Delta_{2,n};\mathbb{Q})\) via the compactified configuration spaces on the Theta graph. </p>
-	
-<p>These cells are linked, so please evaluate them in order. The cell below contains all of our data.</p>
-<div class="sage">
-  <script type="text/x-sage">
+    <p>Let \(\Delta_{g,n}\) denote the tropical moduli space of curves of genus \(g\) with \(n\) markings. The space is equipped with a natural \(S_n\)-action of permuting markings that descends to its homology. We obtain the characters for \(\tilde{H}_*(\Delta_{2,n};\mathbb{Q})\) up to \(n=10\) and obtain particial information about these representations up to \(n=25\). On this page, we present our data. Since the representations involved are large and complicated, we also provide you with functions that can extract specific information, e.g., the character value of a particular conjugacy class, the multiplicity of a particular irreducible representation, etc. </p>
+    
+    <p>The rational homology of \(\Delta_{g,n}\) is related to that of \(\mathcal{M}_{2,n}\) through the following theorem.</p>
+    
+    <p><b>Theorem 1</b>: There is an \(S_n\)-equivariant isomorphism \(Gr^W_{6+2n} H^{6+2n-k}(\mathcal{M}_{2,n};\mathbb{Q}) \cong \tilde{H}_{k-1}(\Delta_{2,n};\mathbb{Q})\).</p>
+
+    <p>The space \(\Delta_{g,n}\) has dimension \(3g+n-4\). In the case \(g=2\), its rational homology vanishes in all but top two degrees.</p>
+
+    <p><b>Theorem 2</b>: \(\tilde{H}_i(\Delta_{2,n};\mathbb{Q}) = 0\) for \(0\leq i \leq n\).</p>
+    
+    <p>The cell below contains all of our data. Each character is represented by its Frobenius characteristic in the Schur basis. <em>(These cells are linked, so please evaluate them in order.)</em> </p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
 R.<q> = Frac(QQ['q'])
 p = SymmetricFunctions(R).p()
 s = SymmetricFunctions(R).s()
@@ -112,14 +133,13 @@ for part in Partitions(25):
         chi25 += q*s(part)
 
 print('Success!')
+        </script>
+    </div>
 
-  </script>
-</div>
-
-<p> The following cell contains functions that help organizing and presenting the data.</p>
-
-<div class="sage">
-  <script type="text/x-sage">
+    <p> The following cell contains helper functions.</p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
 # This function gives the S_n-representation afforded by H_{n+2}(Delta_{2,n};Q) and H_{n+1}(Delta_{2,n};Q).
 # inputs: n, integer, number of marked points
 #         multiplicity, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.
@@ -243,15 +263,35 @@ def z2(n):
         powerSum = homogeneous(**symFnDic)
         return powerSum
 print('Success!')
-  </script>
-
-</div>
-
-<p> Here are some examples. Note that since we only have partial information for n > 10, we use q to indicate unknown values. Please disregard all results that contain the letter q.</p>
-
-<p> Warning: Do NOT believe in the character values for n > 10. Sometimes the q's cancel with each other when they shouldn't. Only ask about multiplicities of specific irreducible representations when n > 10.</p>
-<div class="sage">
-  <script type="text/x-sage">
+        </script>
+    </div>
+    
+    <p> Available functions are <br>
+        <code>Delta2n(n, multiplicity = True, codim1 = True)</code>
+        <p class="tab">This function gives the S_n-representation afforded by H_{n+2}(Delta_{2,n};Q) and H_{n+1}(Delta_{2,n};Q).<br>
+            <code>n</code>, integer, number of marked points <br>
+            <code>multiplicity</code>, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.<br>
+            <code>codim1</code>, boolean. If True, the function will output H_{n+1}(Delta_{2,n};Q); if False, it gives H_{n+2}(Delta_{2,n};Q).
+            </p><br>
+        <code>Delta2n_partition(partition, multiplicity = True, codim1 = True)</code>
+        <p class="tab">This function gives the multiplicity of a specific irreducible representation or the character value of a specific conjugacy class.<br>
+            <code>partion</code>, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in<br>
+            <code>multiplicty</code>, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class<br>
+            <code>codim1</code>, boolean. If True, the function will inquire H_{n+1}(Delta_{2,n};Q); if False, it will inquire H_{n+2}(Delta_{2,n};Q).
+            </p><br>
+        <code>look_up_family(partition, conjugate = False, multiplicity = True, codim1 = True)</code>
+        <p class="tab">This function gives the multiplicity or character value for a family of partitions that look like (k,P), (k+1, P), (k+3, P), etc., where P is some fixed partition.<br>
+            <code>partition</code>, array. This should be the fixed partition P.<br>
+            <code>conjugate</code>, boolean, if one would like to inquire the conjugate of the familiy (k,P), (k+1, P), (k+3, P), etc.<br>
+            <code>multiplicity</code>, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions<br>
+            <code>codim1</code>, boolean, if one would like to know about H_{n+1}(Delta_{2,n};Q) or H_{n+2}(Delta_{2,n};Q)
+            </p><br>
+        We give some examples in the cell below. Note that since we only have partial information for \(n > 10\), we use \(q\) to indicate unknown values. Please disregard all results that contain the letter \(q\).</p>
+    
+    <p> <b>Warning</b>: Do NOT believe in the character values for \(n > 10\). Sometimes the \(q\)'s cancel with each other when they shouldn't. Only ask about multiplicities of specific irreducible representations when \(n > 10\).</p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
 # This gives the character table of H_8(Delta_{2,7};Q)
 Delta2n(7, multiplicity = False, codim1 = True)
 
@@ -269,8 +309,7 @@ Delta2n(7, multiplicity = False, codim1 = True)
 
 # This gives the multiplicity of the standard representation in H_3(Delta_{2,2};Q), H_4(Delta_{2,3};Q), H_5(Delta_{2,4};Q) etc.
 #look_up_family([1], conjugate = False, multiplicity = True, codim1 = True)
-  </script>
-</div>
-
+        </script>
+    </div>
 </body>
 </html>
