@@ -1,5 +1,5 @@
 # Homology representations of compactified configurations on graphs
-This repository hosts the code for the paper titled *Homology representations of compactified configurations on graphs applied to M_2n* by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. arXiv: xxxx
+This repository hosts the code for the paper titled *Homology representations of compactified configurations on graphs applied to M_2n* by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. [arXiv: 2109.03302](https://arxiv.org/abs/2109.03302).
 
 ### Abstract
 The homology of a compactified configuration space of a graph is equipped with commuting actions of a symmetric group and the outer automorphism group of a free group. We construct a small free resolution for these homology representations.
