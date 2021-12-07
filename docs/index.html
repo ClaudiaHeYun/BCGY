@@ -37,6 +37,8 @@ code {
 
 <body>
     <h1>Homology representations of compactified configuration spaces on graphs</h1>
+
+    <h2>Background</h2>
     
     <p>This page contains data from the paper <a href="https://arxiv.org/abs/2109.03302"><em>Homology representations of compactified configurations on graphs applied to \(\mathcal{M}_{2,n}\)</em></a>, by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. Please check out our paper for more details. </p>
 
@@ -44,11 +46,13 @@ code {
     
     <p>The rational homology of \(\Delta_{g,n}\) is related to that of \(\mathcal{M}_{2,n}\) through the following theorem.</p>
     
-    <p><b>Theorem 1</b>: There is an \(S_n\)-equivariant isomorphism \(Gr^W_{6+2n} H^{6+2n-k}(\mathcal{M}_{2,n};\mathbb{Q}) \cong \tilde{H}_{k-1}(\Delta_{2,n};\mathbb{Q})\).</p>
+    <p><b>Theorem 1</b> (Chan-Galatius-Payne): There is an \(S_n\)-equivariant isomorphism \(Gr^W_{6+2n} H^{6+2n-k}(\mathcal{M}_{2,n};\mathbb{Q}) \cong \tilde{H}_{k-1}(\Delta_{2,n};\mathbb{Q})\).</p>
 
-    <p>The space \(\Delta_{g,n}\) has dimension \(3g+n-4\). In the case \(g=2\), its rational homology vanishes in all but top two degrees.</p>
+    <p>The space \(\Delta_{g,n}\) has dimension \(3g+n-4\). So \(\Delta_{2,n}\) has dimension \(n+2\). The following theorem shows that its rational homology vanishes in all but top two degrees.</p>
 
-    <p><b>Theorem 2</b>: \(\tilde{H}_i(\Delta_{2,n};\mathbb{Q}) = 0\) for \(0\leq i \leq n\).</p>
+    <p><b>Theorem 2</b> (Chan): \(\tilde{H}_i(\Delta_{2,n};\mathbb{Z}) = 0\) for \(0\leq i \leq n\).</p>
+
+    <h2>Data Presentation</h2>
     
     <p>The cell below contains all of our data. Each character is represented by its Frobenius characteristic in the Schur basis. <em>(These cells are linked, so please evaluate them in order.)</em> </p>
     
@@ -311,5 +315,74 @@ Delta2n(7, multiplicity = False, codim1 = True)
 #look_up_family([1], conjugate = False, multiplicity = True, codim1 = True)
         </script>
     </div>
+
+<h2>Example</h2>
+<p>We supplement our paper with a small example where each computational step is carried out manually.</p>
+
+<p>We compute the top degree homology \(\tilde{H}_4(\Delta_{2,2};\mathbb{Q})\) as an \(S_2\)-representation. The cellular chains that are associated to \(\text{Conf}_2(R_2)^+\) are 
+    \[\mathbb{Z}[S_2]\left\langle (12|),(1|2),(|12) \right\rangle \overset{\partial}\to \mathbb{Z}[S_2]\left\langle (1|),(|1)\right\rangle
+    \]
+    with boundary operator given by
+    \[
+    \partial: \begin{cases} 
+    (12|) \mapsto (2|) - (1|) \\
+    (1|2) \mapsto 0 \\
+    (|12) \mapsto (|2) - (|1)
+    \end{cases}
+    \]
+    represented by the \(M_{3,2}(\mathbb{Z}[S_2])\)-matrix
+    \[ \partial =
+    \begin{pmatrix}
+    -(12) - (1) & 0 \\
+    0 & 0 \\
+    0 & -(12) - (1)
+    \end{pmatrix}
+    \]
+    where the signs come from the identification of (9).
+    
+    Using Lemmas 2.10 and 3.4, the isometries act in codimension 0 by
+    \[
+    R: \begin{cases} 
+    (12|) \mapsto +(21|) \\
+    (1|2) \mapsto +(1|2) \\
+    (|12) \mapsto +(|21)
+    \end{cases} \quad
+    T: \begin{cases} 
+    (12|) \mapsto (|12) \\
+    (1|2) \mapsto (2|1) \\
+    (|12) \mapsto (12|)
+    \end{cases} \quad
+    B: \begin{cases} 
+    (12|) \mapsto (12|) + (1|2) + (|12) \\
+    (1|2) \mapsto -(1|2) - (|12) - (|21) \\
+    (|12) \mapsto +(|21)
+    \end{cases}
+    \]
+    which are represented by matrices
+    \[
+    R_0=\begin{pmatrix}
+    0 & 0 & -(12) \\
+    0 & (1) & 0 \\
+    -(12) & 0 & 0
+    \end{pmatrix} \;
+    T_0=\begin{pmatrix}
+    0 & 0 & (1) \\
+    0 & -(12) & 0 \\
+    (1) & 0 & 0
+    \end{pmatrix} \;
+    B_0=\begin{pmatrix}
+    (1) & (1) & (1) \\
+    0 & -(1) & -(1)+(12) \\
+    0 & 0 & -(12)
+    \end{pmatrix}
+    \]
+    again with the additional signs coming from (9).
+    
+    The top deegree homology \(\tilde{H}_4(\Delta_{2,2};\mathbb{Q})\) is \(S_n\)-equivariantly isomorphic to the kernel of the stacked matrix
+    \[A_0=\begin{bmatrix}\partial \\ R_0-I \\ T_0+I \\ B_0+I \end{bmatrix}.\]
+    Then the multiplicity spaces of the trivial and sign representations are the kernels of the specialization \(A_0\) along \((1)\mapsto 1\) and \((12)\mapsto 1\), and \((1)\mapsto 1\) and \((12)\mapsto -1\), respectively.
+    
+    In this case the kernel consists of one copy of the trivial representation, as the middle column of \(A_0\) vanishes when specializing \((12)\mapsto 1\). The homology is therefore represented by \(\alpha = (1|2)-(2|1)\), but note that the transposition \((12)\) fixes this sum since it reverses the orientation of the cells. One can immediately observe that \(\alpha\) has no boundary, is fixed by \(r\), and is negated by \(t\) and \(b\).</p>
+
 </body>
 </html>
