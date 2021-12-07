@@ -7,8 +7,8 @@ Using the Peter-Weyl Theorem for symmetric groups, we consider irreducible repre
 
 As our main application, we obtain computer calculations of the top weight cohomology of the moduli spaces M_2n, equivalently the rational homology of the tropical moduli spaces Delta_2n, as a representation of S_n acting by permuting point labels for all n <= 10. We further give new multiplicity calculations for specific irreducible representations of S_n appearing in cohomology for n <= 17. Our approach produces information about these homology groups in a range well beyond what was feasible with previous techniques.
 
-### The code
+### Ccode
 See `computing_hom_rep.ipynb`.
 
-### Data presentation
-See [this webpage](https://claudiaheyun.github.io/Homology-rep-of-compactified-conf-on-graphs/).
+### Data presentation & Example
+See [this webpage](https://claudiaheyun.github.io/BCGY/).
