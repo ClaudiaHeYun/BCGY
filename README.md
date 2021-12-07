@@ -11,4 +11,4 @@ As our main application, we obtain computer calculations of the top weight cohom
 See `computing_hom_rep.ipynb`.
 
 ### Data presentation
-See [this webpage](https://claudiaheyun.github.io/Homology-rep-of-compactified-conf-on-graphs/).
+See [this webpage](https://claudiaheyun.github.io/BCGY/).
