@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Data on Delta_3n</title>
+<meta name="author" content="Bibby, Chan, Gadish, Yun">
+<meta name="description" content="A Serre spectral sequence for the moduli space of tropical curves">
+
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>sagecell.makeSagecell({"inputLocation": ".sage", linked: 'True'});</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style type="text/css">
+p {
+  font-family: Verdana,Geneva,sans-serif; 
+  font-size: 20px;
+}
+h1 {text-align:center}
+h3 {font-size:140%;}
+p {font-size:100%;}
+h4 {font-size:80%;}
+body {
+margin-left:10%;
+margin-right:10%;
+}
+code {
+  background-color:#EEEEEE;
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+}
+.tab { margin-left: 40px; }
+</style>
+</head>
+
+<body>
+    <h1>A Serre spectral sequence for the moduli space of tropical curves</h1>
+
+    <h2>Data Presentation<a name=data></a></h2>
+    
+    <p>The cell below contains all of our data. Each character is represented by its Frobenius characteristic in the Schur basis. <em>(These cells are linked, so please evaluate them in order.)</em> </p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
+R.<q> = Frac(QQ['q'])
+p = SymmetricFunctions(R).p()
+s = SymmetricFunctions(R).s()
+
+# we compute the top and bottom degree homology representations and use Faber's formula to deduce the middle degree.
+topChi1 = 0*s([1])
+bottomChi1 = 0*s([1])
+
+topChi2 = 0*s([2])
+bottomChi2 = 0*s([2])
+
+topChi3 = s([3])
+bottomChi3 = 0*s([3])
+
+topChi4 = s([2, 2])
+bottomChi4 = 0*s([4])
+
+topChi5 = s([2, 1, 1, 1]) + 2*s([3, 1, 1])
+bottomChi5 = 0*s([5])
+
+topChi6 = s([2, 2, 1, 1]) + s([3, 1, 1, 1]) + s([3, 2, 1]) + 3*s([3, 3]) + 3*s([4, 1, 1]) + s([4, 2]) + s([5, 1])
+bottomChi6 = 0*s([6])
+
+topChi7 = 2*s([2, 1, 1, 1, 1, 1]) + 2*s([2, 2, 1, 1, 1]) + 2*s([2, 2, 2, 1]) + 3*s([3, 1, 1, 1, 1]) + 3*s([3, 2, 1, 1]) + 5*s([3, 2, 2]) + 2*s([3, 3, 1]) + 5*s([4, 2, 1]) + 2*s([4, 3]) + 5*s([5, 2]) + 2*s([6, 1]) + s([7])
+bottomChi7 = 0*s([7])
+
+topChi8 = 2*s([2, 2, 1, 1, 1, 1]) + 4*s([2, 2, 2, 2]) + 3*s([3, 1, 1, 1, 1, 1]) + 8*s([3, 2, 1, 1, 1]) + 8*s([3, 2, 2, 1]) + 9*s([3, 3, 1, 1]) + 2*s([3, 3, 2]) + 8*s([4, 1, 1, 1, 1]) + 12*s([4, 2, 1, 1]) + 12*s([4, 2, 2]) + 8*s([4, 3, 1]) + 4*s([4, 4]) + 6*s([5, 1, 1, 1]) + 9*s([5, 2, 1]) + 2*s([5, 3]) + 2*s([6, 1, 1]) + 4*s([6, 2]) + s([8])
+bottomChi8 = s([8])
+
+topChi9 = s([1, 1, 1, 1, 1, 1, 1, 1, 1]) + 3*s([2, 1, 1, 1, 1, 1, 1, 1]) + 5*s([2, 2, 1, 1, 1, 1, 1]) + 11*s([2, 2, 2, 1, 1, 1]) + 5*s([2, 2, 2, 2, 1]) + 5*s([3, 1, 1, 1, 1, 1, 1]) + 12*s([3, 2, 1, 1, 1, 1]) + 26*s([3, 2, 2, 1, 1]) + 7*s([3, 2, 2, 2]) + 17*s([3, 3, 1, 1, 1]) + 24*s([3, 3, 2, 1]) + 12*s([3, 3, 3]) + 3*s([4, 1, 1, 1, 1, 1]) + 25*s([4, 2, 1, 1, 1]) + 25*s([4, 2, 2, 1]) + 36*s([4, 3, 1, 1]) + 22*s([4, 3, 2]) + 13*s([4, 4, 1]) + 6*s([5, 1, 1, 1, 1]) + 34*s([5, 2, 1, 1]) + 9*s([5, 2, 2]) + 29*s([5, 3, 1]) + 2*s([5, 4]) + 15*s([6, 1, 1, 1]) + 16*s([6, 2, 1]) + 6*s([6, 3]) + 9*s([7, 1, 1])
+bottomChi9 = s([1, 1, 1, 1, 1, 1, 1, 1, 1]) + s([3, 2, 2, 2]) + s([4, 4, 1]) + s([5, 2, 2]) + s([7, 2])
+
+print('Success!')
+        </script>
+    </div>
+
+    <p> The following cell contains helper functions.</p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
+# This function gives the S_n-representation afforded by H_{n+5}(Delta_{3,n};Q), H_{n+4}(Delta_{3,n};Q) and H_{n+3}(Delta_{3,n};Q).
+# inputs: n, integer, number of marked points 
+#         multiplicity, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.
+#         deg, string, can be "top", "middle" or "bottom"
+def Delta3n(n, multiplicity = True, deg = "top"):
+    if multiplicity:
+        irreps = []
+        mults = []
+        if deg == "top":
+            rep = eval('topChi'+str(n))
+            for part in Partitions(n):
+                irreps.append(part)
+                mults.append(rep.scalar(s(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Irreducible representation", "Multiplicity"))
+            for irrep, mult in zip(irreps, mults):
+                print(format_row.format(str(irrep), str(mult)))
+            return rep
+        elif deg == "bottom":
+            rep = eval('bottomChi'+str(n))
+            for part in Partitions(n):
+                irreps.append(part)
+                mults.append(rep.scalar(s(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Irreducible representation", "Multiplicity"))
+            for irrep, mult in zip(irreps, mults):
+                print(format_row.format(str(irrep), str(mult)))                                                                    
+        elif deg == "middle":
+            rep = (-1)^(n+3)*z3(n)+eval('bottomChi'+str(n))+eval('topChi'+str(n))
+            for part in Partitions(n):
+                irreps.append(part)
+                mults.append(rep.scalar(s(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Irreducible representation", "Multiplicity"))
+            for irrep, mult in zip(irreps, mults):
+                print(format_row.format(str(irrep), str(mult)))
+        else:
+            print("Please enter a valid degree!")
+        return rep
+    else:
+        conj = []
+        char = []
+        if deg == "top":
+            rep = eval('topChi'+str(n))
+            for part in Partitions(n):
+                conj.append(part)
+                char.append(rep.scalar(p(part)))
+                #print('conjugacy class',part,'value',rep.scalar(p(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Conjugacy class", "Character value"))
+            for conjugacy, value in zip(conj, char):
+                print(format_row.format(str(conjugacy), str(value)))
+        elif deg == "bottom":
+            rep = eval('bottomChi'+str(n))
+            for part in Partitions(n):
+                conj.append(part)
+                char.append(rep.scalar(p(part)))
+                #print('conjugacy class',part,'value',rep.scalar(p(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Conjugacy class", "Character value"))
+            for conjugacy, value in zip(conj, char):
+                print(format_row.format(str(conjugacy), str(value)))
+        elif deg == "middle":
+            rep = (-1)^(n+3)*z3(n)+eval('bottomChi'+str(n))+eval('topChi'+str(n))
+            for part in Partitions(n):
+                conj.append(part)
+                char.append(rep.scalar(p(part)))
+            format_row = "{:>80} {:>20}"
+            print(format_row.format("Conjugacy class", "Character value"))
+            for conjugacy, value in zip(conj, char):
+                print(format_row.format(str(conjugacy), str(value)))
+        else:
+            print("Please enter a valid degree!")
+
+# This function gives the multiplicity of a specific irreducible representation or the character value of a specific conjugacy class
+# inputs: partion, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in
+#         multiplicty, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class
+#         deg, string, can be "top", "middle" or "bottom"
+def Delta3n_partition(partition, multiplicity = True, deg = "top"):
+    n=sum(partition)
+    if multiplicity:
+        if deg == "top":
+            return eval('topChi'+str(n)).scalar(s(partition))
+        elif deg == "bottom":
+            return eval('bottomChi'+str(n)).scalar(s(partition))
+        elif deg == "middle":
+            return ((-1)^(n+3)*z3(n)+eval('bottomChi'+str(n))+eval('topChi'+str(n))).scalar(s(partition))
+        else:
+            print("Please enter a valid degree!")
+    else:
+        if deg == "top":
+            rep = eval('topChi'+str(n))
+            return rep.scalar(p(partition))
+        elif deg == "bottom":
+            rep = eval('bottomChi'+str(n))
+            return rep.scalar(p(partition))
+        elif deg == "middle":
+            rep = (-1)^(n+3)*z3(n)+eval('bottomChi'+str(n))+eval('topChi'+str(n))
+            return rep.scalar(p(partition))
+        else:
+            print("Please enter a valid degree!")
+
+# This function gives the multiplicity or character value for a family of partitions that look like (k,P), (k+1, P), (k+3, P), etc., where P is some fixed partition.
+# inputs: partition, array. This should be the fixed partition P.
+#         conjugate, boolean, if one would like to inquire the conjugate of the familiy (k,P), (k+1, P), (k+3, P), etc.
+#         multiplicity, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions
+#         deg, string, can be "top", "middle" or "bottom"
+def look_up_family(partition, conjugate = False, multiplicity = True, deg = "top"):
+    if (deg != "top") & (deg != "middle") & (deg != "bottom"):
+        print("Please enter a valid degree!")
+        return
+    tail_sum = sum(partition)
+    parts = []
+    mults = []
+    if len(partition) > 0:
+        start = partition[0]
+    else:
+        start = 1
+    for i in range(start, 9-tail_sum+1):
+        part = Partition([i]+partition)
+        if conjugate:
+            parts.append(part.conjugate())
+            mults.append(Delta3n_partition(part.conjugate(), multiplicity, deg))
+        else:
+            parts.append(part)
+            mults.append(Delta3n_partition(part, multiplicity, deg))
+    if deg == "top":
+        print('H_{n+5}(Delta_{3,n};Q)')
+    elif deg == "bottom":
+        print('H_{n+3}(Delta_{3,n};Q)')
+    elif deg == "middle":
+        print('H_{n+4}(Delta_{3,n};Q)')
+    format_row = "{:>80} {:>20}"
+    if multiplicity:
+        print(format_row.format("Partition", "Multiplicity"))
+    else:
+        print(format_row.format("Partition", "Character value"))
+    for part, mult in zip(parts, mults):
+        print(format_row.format(str(part), str(mult)))
+
+
+# helper function
+def dPart(F, d):
+    R.<p1,p2,p3,p4,p6> = QQ[]
+    F = F.polynomial(QQ)
+    return sum( [ F.monomial_coefficient(m) * m for m in F.monomials() if  m.weighted_degree({p1:1, p2:2, p3:3, p4:4, p6:6}) == d ] )
+
+# gives the degree n part of z_3 in terms of power sums
+def z3(n):
+    var('p1,p2,p3,p4,p6')
+    faber_3 = -(1+p1)^4/(24*(1+p2)^3) + (1+p1)^2/(4*(1+p2)^2)+(1+p1)/(2*(1+p3))+(1+p3)*(1+p1)/(6*(1+p6))-1/(8*(1+p2))+(1+p2)/(4*(1+p4))
+    taylor_series = taylor(faber_3, (p1, 0),(p2,0),(p3,0),(p4,0),(p6,0), n)
+    expanded = taylor_series.expand()
+    homogeneous = dPart(expanded, n)
+    if homogeneous == 0:
+        return 0
+    else:
+        symFnLookup = {'p1':p([1]), 'p2':p([2]),'p3':p([3]),'p4':p([4]),'p6':p([6])}
+        symFnDic = {'{}'.format(ar): symFnLookup['{}'.format(ar)] for ar in homogeneous.args()}
+        powerSum = homogeneous(**symFnDic)
+        return s(powerSum)
+
+print("success!")
+        </script>
+    </div>
+    
+    <p> Available functions are </p>
+        <p><code>Delta3n(n, multiplicity = True, deg = "top")</code></p>
+        <p class="tab">This function gives the \(S_n\)-representation afforded by \(\tilde{H}_{n-i}(\Delta_{3,n};\mathbb{Q})\) where \(i=0,1,2\), which correspond to deg "top", "middle" and "bottom".<br>
+            <code>n</code>, integer, number of marked points. <br>
+            <code>multiplicity</code>, boolean. If True, the function will output the Frobenius characteristic of the representation in the Schur basis. So one could extract the multiplicities of irreducible representations; if False, the function will output the character table of the representation.<br>
+            <code>deg</code>, string, can be "top", "middle" or "bottom".
+            </p>
+        <p><code>Delta3n_partition(partition, multiplicity = True, deg = "top")</code></p>
+        <p class="tab">This function gives the multiplicity of a specific irreducible representation or the character value of a specific conjugacy class.<br>
+            <code>partion</code>, array, the partition that indexes the irreducible representation or the conjugacy class one is interested in.<br>
+            <code>multiplicty</code>, boolean. True gives multiplicity of irreducible representation; False gives character value of conjugacy class.<br>
+            <code>deg</code>, string, can be "top", "middle" or "bottom".
+            </p>
+        <p><code>look_up_family(partition, conjugate = False, multiplicity = True, deg = "top")</code></p>
+        <p class="tab">This function gives the multiplicity or character value for a family of partitions that look like \((k,P), (k+1, P), (k+3, P)\), etc., where \(P\) is some fixed partition.<br>
+            <code>partition</code>, array. This should be the fixed partition \(P\).<br>
+            <code>conjugate</code>, boolean, if one would like to inquire the conjugate of the familiy \((k,P), (k+1, P), (k+3, P)\), etc.<br>
+            <code>multiplicity</code>, boolean, if one would like to know the multiplicity of the irreducibles or the character values of the conjugacy classes indexed by the partitions.<br>
+            <code>deg</code>, string, can be "top", "middle" or "bottom".
+            </p>
+    <p>We give some examples in the cell below.</p>
+    
+    <div class="sage">
+        <script type="text/x-sage">
+# This gives the character table of H_12(Delta_{2,7};Q)
+Delta3n(7, multiplicity = False, deg = "top")
+
+# This gives the Frobenius characteristic of H_11(Delta_{2,7};Q) in the Schur basis
+#Delta3n(7, multiplicity = True, deg = "middle")
+
+# This gives the character value of H_9(Delta_{2,6};Q) at the conjugacy class represented by (123)(45)(6)
+#Delta2n_partition([3,2,1], multiplicity = False, deg = "bottom")
+
+# This gives the multiplicity of the irreducible representation indexed by [4,2,2,1] in H_14(Delta_{2,9};Q)
+#Delta2n_partition([4,2,2,1], multiplicity = True, deg = "top")
+
+# This gives the multiplicity of the sign representation in H_6(Delta_{2,1};Q), H_7(Delta_{2,2};Q), H_8(Delta_{2,3};Q), etc.
+#look_up_family([], conjugate = True, multiplicity = True, deg = "top")
+
+# This gives the multiplicity of the standard representation in H_6(Delta_{2,2};Q), H_7(Delta_{2,3};Q), H_8(Delta_{2,4};Q) etc.
+#look_up_family([1], conjugate = False, multiplicity = True, deg = "middle")
+        </script>
+    </div>
+
+</body>
+</html>
