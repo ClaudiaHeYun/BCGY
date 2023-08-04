@@ -14,7 +14,7 @@ We achieve our calculations via a comparison with the homology of compactified c
 See folder genus2.
 
 ## A Serre spectral sequence for the moduli space of tropical curves
-arXiv link coming.
+[arXiv: 2307.01960](https://arxiv.org/abs/2307.01960)
 
 ### Abstract
 We construct, for all $g\ge 2$ and $n\ge 0$, a spectral sequence of rational $S\_n$-representations which computes the $S\_n$-equivariant reduced rational cohomology of the tropical moduli spaces of curves $\Delta\_{g,n}$ in terms of compactly supported cohomology groups of configuration spaces of $n$ points on graphs of genus $g$.  Using the canonical $S\_n$-equivariant isomorphisms $\widetilde{H}^{k-1}(\Delta\_{g,n};\mathbb{Q}) \cong W\_0 H^i\_c(\mathcal{M}\_{g,n};\mathbb{Q})$, we calculate the weight $0$, compactly supported rational cohomology of the moduli spaces $\mathcal{M}\_{g,n}$ in the range $g=3$ and $n\le 9.$
