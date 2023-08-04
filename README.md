@@ -3,7 +3,7 @@
 This repository hosts code presented in two papers by Christin Bibby, Melody Chan, Nir Gadish, and Claudia He Yun. The computational data in both papers can be found on [this page](https://claudiaheyun.github.io/BCGY/).
 
 ## Homology representations of compactified configurations on graphs
-[arXiv: 2109.03302](https://arxiv.org/abs/2109.03302).
+[arXiv: 2109.03302](https://arxiv.org/abs/2109.03302)
 
 ### Abstract
 We obtain new calculations of the top weight rational cohomology of the moduli spaces $\mathcal{M}\_{2,n}$, equivalently the rational homology of the tropical moduli spaces $\Delta\_{2,n}$, as a representation of $S_n$.  These calculations are achieved fully for all $n <= 11$, and partially - for specific irreducible representations of $S_n$ - for $n <= 22$.   We also present conjectures, verified up to $n=22$, for the multiplicities of the irreducible representations std_n and its conjugate.
